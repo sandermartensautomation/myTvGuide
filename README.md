@@ -31,3 +31,5 @@ open TvGids.xcodeproj
 xcodebuild -project TvGids.xcodeproj -scheme TvGids -destination 'platform=tvOS Simulator,name=Apple TV' test
 ```
 `channels.json` en `palette.json` worden direct uit `pipeline/` en `shared/` in de app gebundeld.
+
+VRT MAX wordt op bundle-ID (`be.vrt.vrtnu`) geopend via een privé-API, omdat de tvOS-app geen URL-scheme heeft. Fijn voor eigen installaties via Xcode; een App Store-build wordt daarop afgekeurd.

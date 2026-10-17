@@ -92,11 +92,17 @@ struct GuideScreen: View {
     private func open(_ channel: Channel, _ program: Program) {
         if let url = links.overrideURL(for: channel) {
             UIApplication.shared.open(url) { success in
-                print("opened:", success)
+                if !success, let app = links.app(for: channel) { Task { @MainActor in missingApp = app } }
             }
             return
         }
-        guard let app = links.app(for: channel), let url = app.launchURL else { return }
+        guard let app = links.app(for: channel) else { return }
+        if let bundleId = app.bundleId {
+            // VRT MAX heeft op tvOS geen URL-scheme en geen universal links: alleen de app openen kan.
+            if !PrivateLauncher.open(bundleID: bundleId) { missingApp = app }
+            return
+        }
+        guard let url = app.launchURL else { return }
         UIApplication.shared.open(url, options: [:]) { success in
             if !success { Task { @MainActor in missingApp = app } }
         }

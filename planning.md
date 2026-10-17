@@ -17,8 +17,10 @@ De gids bevat de volgende 11 zenders, gekoppeld aan hun respectievelijke apps en
 | Play5 | Play5.be | GoPlay / Play | `goplay-app://` |
 | Play6 | Play6.be | GoPlay / Play | `goplay-app://` |
 | Play7 | Play7.be | GoPlay / Play | `goplay-app://` |
-| VRT 1 | VRT1.be | VRT MAX | `vrtmax://` |
-| VRT Canvas | VRTCanvas.be | VRT MAX | `vrtmax://` |
+| VRT 1 | VRT1.be | VRT MAX | bundle-ID `be.vrt.vrtnu` (zie noot) |
+| VRT Canvas | VRTCanvas.be | VRT MAX | bundle-ID `be.vrt.vrtnu` (zie noot) |
+
+**Noot VRT MAX:** de tvOS-app heeft geen URL-scheme (`vrtmax://`, `vrtnu://` en varianten getest) en reageert niet op universal links. De gids opent VRT MAX daarom op bundle-ID via de privé-API `LSApplicationWorkspace` (`PrivateLauncher.swift`); de kijker kiest daarna zelf de zender. Dit werkt voor eigen installaties via Xcode, niet voor een App Store-release.
 
 ## 3. Data Pipeline & Backend
 - **Bron:** Data wordt opgehaald uit de repository `iptv-org/epg` (site: `telenet.tv`).

@@ -9,8 +9,8 @@
     {"id": "play5", "name": "Play5", "sourceId": "Play5.be", "siteId": "vijfhd", "app": "goplay", "scheme": "goplay-app://", "logoFile": "play-fictie-be.png", "openUrl": "https://www.play.tv/live-kijken/play-fictie"},
     {"id": "play6", "name": "Play6", "sourceId": "Play6.be", "siteId": "zes", "app": "goplay", "scheme": "goplay-app://", "logoFile": "play-actie-be.png", "openUrl": "https://www.play.tv/live-kijken/play-actie"},
     {"id": "play7", "name": "Play7", "sourceId": "Play7.be", "siteId": "zeven", "app": "goplay", "scheme": "goplay-app://", "logoFile": "play-reality-be.png", "openUrl": "https://www.play.tv/live-kijken/play-reality"},
-    {"id": "vrt1", "name": "VRT 1", "sourceId": "VRT1.be", "siteId": "eenhd", "app": "vrtmax", "scheme": "vrtmax://", "logoFile": "vrt-1-be.png", "openUrl": "vrtmax://"},
-    {"id": "vrtcanvas", "name": "VRT Canvas", "sourceId": "VRTCanvas.be", "siteId": "ketnetcanvashd", "app": "vrtmax", "scheme": "vrtmax://", "logoFile": "vrt-canvas-be.png", "openUrl": "vrtmax://"}
+    {"id": "vrt1", "name": "VRT 1", "sourceId": "VRT1.be", "siteId": "eenhd", "app": "vrtmax", "scheme": "vrtmax://", "logoFile": "vrt-1-be.png"},
+    {"id": "vrtcanvas", "name": "VRT Canvas", "sourceId": "VRTCanvas.be", "siteId": "ketnetcanvashd", "app": "vrtmax", "scheme": "vrtmax://", "logoFile": "vrt-canvas-be.png"}
   ],
   "apps": {
     "vtmgo": {
@@ -26,6 +26,7 @@
     "vrtmax": {
       "name": "VRT MAX",
       "scheme": "vrtmax://",
+      "bundleId": "be.vrt.vrtnu",
       "appStoreId": 1337574835
     }
   },

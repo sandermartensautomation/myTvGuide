@@ -4,6 +4,8 @@ struct AppInfo: Decodable, Sendable, Equatable {
     let name: String
     let scheme: String
     let appStoreId: Int
+    /// Apps zonder bruikbaar URL-scheme op tvOS (VRT MAX) worden op bundle-ID geopend.
+    var bundleId: String?
 
     var launchURL: URL? { URL(string: scheme) }
     var storeURL: URL? { URL(string: "https://apps.apple.com/be/app/id\(appStoreId)") }

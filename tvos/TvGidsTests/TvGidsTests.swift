@@ -121,16 +121,17 @@ final class AppLinksTests: XCTestCase {
         XCTAssertEqual(links.channelURLs["play5"]?.absoluteString, base + "play-fictie")
         XCTAssertEqual(links.channelURLs["play6"]?.absoluteString, base + "play-actie")
         XCTAssertEqual(links.channelURLs["play7"]?.absoluteString, base + "play-reality")
-        XCTAssertEqual(links.channelURLs.count, 11)
+        XCTAssertEqual(links.channelURLs.count, 9)
     }
 
-    func testVTMAndVRTUseTheirAppScheme() {
+    func testVTMUsesSchemeAndVRTUsesBundleID() {
         let links = AppLinks(bundle: Bundle(for: GuideStore.self))
         for id in ["vtm", "vtm2", "vtm3", "vtm4", "vtmgold"] {
             XCTAssertEqual(links.channelURLs[id]?.scheme, "vtmgo", id)
         }
         for id in ["vrt1", "vrtcanvas"] {
-            XCTAssertEqual(links.channelURLs[id]?.scheme, "vrtmax", id)
+            XCTAssertNil(links.channelURLs[id], id)
         }
+        XCTAssertEqual(links.apps["vrtmax"]?.bundleId, "be.vrt.vrtnu")
     }
 }

@@ -65,6 +65,17 @@ struct TimeGrid: Sendable, Equatable {
         let step = Double(slotMinutes) * 60
         return Date(timeIntervalSince1970: (date.timeIntervalSince1970 / step).rounded(.down) * step)
     }
+
+    /// Geeft 20:00 uur (Brusselse tijd) van de dag van `date`.
+    static func eveningDate(relativeTo date: Date = .now) -> Date {
+        var cal = Calendar(identifier: .gregorian)
+        cal.timeZone = BrusselsTime.zone
+        var comps = cal.dateComponents([.year, .month, .day], from: date)
+        comps.hour = 20
+        comps.minute = 0
+        comps.second = 0
+        return cal.date(from: comps) ?? date
+    }
 }
 
 enum BrusselsTime {

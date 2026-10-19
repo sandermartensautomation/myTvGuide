@@ -79,6 +79,12 @@ final class TimeGridTests: XCTestCase {
         XCTAssertEqual(BrusselsTime.format(date("2026-10-15T18:35:00Z")), "20:35")
         XCTAssertEqual(BrusselsTime.range(date("2026-01-15T19:35:00Z"), date("2026-01-15T20:25:00Z")), "20:35 - 21:25")
     }
+
+    func testEveningDate() {
+        let sample = date("2026-10-15T12:10:00Z")
+        let evening = TimeGrid.eveningDate(relativeTo: sample)
+        XCTAssertEqual(BrusselsTime.format(evening), "20:00")
+    }
 }
 
 final class GuideDecodingTests: XCTestCase {
@@ -97,6 +103,18 @@ final class GuideDecodingTests: XCTestCase {
         let app = AppInfo(name: "VTM GO", scheme: "vtmgo://", appStoreId: 589370040)
         XCTAssertEqual(app.launchURL?.scheme, "vtmgo")
         XCTAssertEqual(app.storeURL?.absoluteString, "https://apps.apple.com/be/app/id589370040")
+    }
+
+    func testChannelProgramAtTime() throws {
+        let url = try XCTUnwrap(Bundle(for: Self.self).url(forResource: "sample", withExtension: "json"))
+        let guide = try Guide.decode(Data(contentsOf: url))
+        let channel = try XCTUnwrap(guide.channels.first)
+        let second = channel.programs[1]
+        // Binnen het programma:
+        let mid = second.start.addingTimeInterval(60)
+        XCTAssertEqual(channel.program(at: mid)?.start, second.start)
+        // Exact op de starttijd:
+        XCTAssertEqual(channel.program(at: second.start)?.start, second.start)
     }
 }
 

@@ -50,6 +50,8 @@ struct GuideScreen: View {
                 }
             }
         }
+        // De tvOS-veilige zone bovenaan (~60 pt) maakt de ruimte boven de Avond-knop te groot.
+        .ignoresSafeArea(edges: .top)
         .task { await store.refresh() }
         .onChange(of: scenePhase) { _, phase in
             switch phase {

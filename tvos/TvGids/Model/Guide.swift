@@ -19,6 +19,13 @@ struct Channel: Codable, Sendable, Equatable, Identifiable {
     let app: String
     let scheme: String
     let programs: [Program]
+
+    /// Zoekt het programma dat op `time` loopt (nu-lijn), of het eerstvolgende/laatste programma.
+    func program(at time: Date) -> Program? {
+        programs.first(where: { $0.isLive(at: time) })
+            ?? programs.first(where: { $0.start >= time })
+            ?? programs.last
+    }
 }
 
 struct Program: Codable, Sendable, Equatable, Identifiable {

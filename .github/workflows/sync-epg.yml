@@ -57,6 +57,13 @@ jobs:
           npm run grab --- --channels=custom.channels.xml --days=7 --output=guide.xml
           test -s guide.xml
 
+      - name: Vul gaten op
+        run: python pipeline/fill_gaps.py epg/guide.xml
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: guide-xml
+          path: epg/guide.xml
       - name: Converteer naar JSON
         run: |
           mkdir -p _site
